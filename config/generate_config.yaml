@@ -1,0 +1,4 @@
+io:
+  log_dir: "logs/generate"
+  output_dir: "output/generate"
+  output_file: "generate_solution.json"

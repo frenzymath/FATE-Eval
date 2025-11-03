@@ -1,0 +1,16 @@
+name = "v4130"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["V4130"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.13.0"
+
+[[lean_lib]]
+name = "V4130"

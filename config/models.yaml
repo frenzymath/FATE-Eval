@@ -1,0 +1,17 @@
+# Model Configuration File
+# All available commercial APIs
+# All input and output prices are in USD
+
+commercial_apis:
+
+  # Example
+  openai_o3:
+    name: "o3"
+    provider: "openai"
+    base_url: "https://api.openai.com/v1"
+    model_id: "o3"
+    max_tokens: 64000
+    rpm_limit: 500
+    tpm_limit: 50000
+    input_price_per_1k: 0.00 
+    output_price_per_1k: 0.00

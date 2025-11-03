@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "informal_statement": "Inductively define $G^n=G\\times G\\times\\cdots \\times G$, the product of $n$ same groups $G$. If $G$ is a finite group, prove that this group has order $|G|^n$.",
+    "formal_statement": "import Mathlib\n\n/--\nInductively define $G^n=G\\times G\\times\\cdots \\times G$, the product of $n$ same groups $G$.\nIf $G$ is a finite group, prove that this group has order $|G|^n$.\n-/\ntheorem prod_card_eq_card_pow {G : Type*} [Fintype G] [Group G] (n : ℕ) :\n    Fintype.card (Π _ : Fin n, G) = (Fintype.card G) ^ n := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 2,
+    "informal_statement": "Let $G$ be a cyclic group with generator $a$, and let $G^{\\prime}$ be a group isomorphic to $G$. If $\\phi: G \\rightarrow G^{\\prime}$ is an isomorphism, show that, for every $x \\in G, \\phi(x)$ is completely determined by the value $\\phi(a)$. That is, if $\\phi: G \\rightarrow G^{\\prime}$ and $\\psi: G \\rightarrow G^{\\prime}$ are two isomophisms such that $\\phi(a)=\\psi(a)$, then $\\phi(x)=\\psi(x)$ for all $x \\in G$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a cyclic group with generator $a$, and let $G^{\\prime}$ be a group isomorphic to $G$.\nIf $\\phi: G \\rightarrow G^{\\prime}$ is an isomorphism, show that, for every $x \\in G, \\phi(x)$ is\ncompletely determined by the value $\\phi(a)$. That is, if $\\phi: G \\rightarrow G^{\\prime}$ and\n$\\psi: G \\rightarrow G^{\\prime}$ are two isomophisms such that $\\phi(a)=\\psi(a)$,\nthen $\\phi(x)=\\psi(x)$ for all $x \\in G$.\n-/\ntheorem monoidHom_eq_of_isCyclic {G G' : Type*} [Group G] [Group G'] (a : G)\n    (h : ∀ g : G, ∃ n, g = a ^ n) (f1 f2 : G →* G') (heq : f1 a = f2 a) :\n    ∀ g : G, f1 g = f2 g := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 3,
+    "informal_statement": "If $f:G\\to H$ and $g:H\\to K$ are surjective homomorphisms of groups, then the composition $g\\circ f:G\\to K$ is also a surjective homomorphism.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $f:G\\to H$ and $g:H\\to K$ are surjective homomorphisms of groups, then the composition\n$g\\circ f:G\\to K$ is also a surjective homomorphism.\n-/\ntheorem comp_surjective_of_surjective {G H K : Type*} [Group G] [Group H] [Group K]\n    (f : G →* H) (g : H →* K) (hf : Function.Surjective f) (hg : Function.Surjective g) :\n    Function.Surjective (g.comp f) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 4,
+    "informal_statement": "Let $\\phi: G \\rightarrow G^{\\prime}$ be a group homomorphism. Show that $ab\\in \\operatorname{Ker}\\phi$ if and only if $ba\\in \\operatorname{Ker}\\phi$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $\\phi: G \\rightarrow G^{\\prime}$ be a group homomorphism. Show that $ab\\in \\operatorname{Ker}\\phi$ if and only if $ba\\in \\operatorname{Ker}\\phi$.\n-/\ntheorem mul_mem_ker_comm {G G' : Type*} [Group G] [Group G'] (f : G →* G') {a b : G} :\n    (a * b ∈ f.ker)  ↔ (b * a ∈ f.ker) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 5,
+    "informal_statement": "Prove that a homomorphism $\\phi: G \\rightarrow G^{\\prime}$ is an isomorphism(There exists a two-sided inverse map $\\phi^{-1}:G'\\to G$) if and only if it is injective and surjective.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that a homomorphism $\\phi: G \\rightarrow G^{\\prime}$ is an isomorphism\n(There exists a two-sided inverse map $\\phi^{-1}:G'\\to G$)\nif and only if it is injective and surjective.\n-/\ntheorem has_inverse_iff_isomorphism {G G' : Type*} [Group G] [Group G'] (φ : G →* G') :\n    (∃ φ₁ : G' → G, Function.LeftInverse φ₁ φ ∧ Function.RightInverse φ₁ φ) ↔\n    (Function.Injective φ ∧ Function.Surjective φ) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 6,
+    "informal_statement": "Prove that a if $G$ and $H$ are finite groups and their orders are coprime, then any homomorphism $f: G \\rightarrow H$ is trivial, i.e. $f(G) = \\{ 1_H \\}$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that a if $G$ and $H$ are finite groups and their orders are coprime,\nthen any homomorphism $f: G \\rightarrow H$ is trivial, i.e. $f(G) = \\{ 1_H \\}$.\n-/\ntheorem MonoidHom.eq_id_of_card_gcd_eq_one {G H: Type*} [Finite H] [Finite G][Group G] [Group H]\n    (h : (Nat.card H).gcd (Nat.card G) = 1) (f : G →* H) : ∀ p : G , f p = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 7,
+    "informal_statement": "Let $\\phi: G \\rightarrow G^{\\prime}$ be a group homomorphism. Show that $\\phi(G)$ is Abelian if and only if $x y x^{-1} y^{-1} \\in \\operatorname{Ker}(\\phi)$ for all $x, y \\in G$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $\\phi: G \\rightarrow G^{\\prime}$ be a group homomorphism. Show that $\\phi(G)$ is Abelian\nif and only if $x y x^{-1} y^{-1} \\in \\operatorname{Ker}(\\phi)$ for all $x, y \\in G$.\n-/\ntheorem commutative_iff_commutator_mem_ker  {G H : Type} [Group G] [Group H] (f : G →* H) :\n    (∀ x y : H, x ∈ f.range ∧ y ∈ f.range → x * y = y * x)\n    ↔ ∀ x y : G, x * y * x⁻¹ * y⁻¹ ∈ f.ker := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 8,
+    "informal_statement": "Let $G$ be a group, for $g\\in G$, we set $f_g(x):=gxg^{-1}$ to be an isomorphism in $\\operatorname{Aut}(G)$, prove that the kernel of the homomorphism map $\\phi:G\\to\\operatorname{Aut}(G),\\ g\\mapsto f_g$ is the center of $G$, that is $\\operatorname{Ker}\\phi=Z(G)$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group, for $g\\in G$, we set $f_g(x):=gxg^{-1}$ to be an isomorphism in\n$\\operatorname{Aut}(G)$, prove that the kernel of the homomorphism map\n$\\phi:G\\to\\operatorname{Aut}(G),\\ g\\mapsto f_g$ is the center of $G$, that is\n$\\operatorname{Ker}\\phi=Z(G)$.\n-/\ntheorem conj_ker_eq_center (G : Type*) [Group G] :\n    MonoidHom.ker (@MulAut.conj G _) = Subgroup.center G := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 9,
+    "informal_statement": "Set $f:G\\to H$ is a homomorphism between two groups. If $f(a)$ is not of finite order, then $a$ is also not of finite order.",
+    "formal_statement": "import Mathlib\n\n/--\nSet $f:G\\to H$ is a homomorphism between two groups.\nIf $f(a)$ is not of finite order, then $a$ is also not of finite order.\n-/\ntheorem orderOf_eq_zero_of_monoidHom {G H : Type*} [Group G] [Group H] {f : G →* H} {a : G}\n    (h : orderOf (f a) = 0) : orderOf a = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 10,
+    "informal_statement": "Set $f:G\\to H$ is a homomorphism between two groups. \nIf the range of $f$ has $n$ elements, then $x^{n} \\in \\operatorname{Ker} f$ for every $x \\in G$.",
+    "formal_statement": "import Mathlib\n\n/--\nSet $f:G\\to H$ is a homomorphism between two groups.\nIf the range of $f$ has $n$ elements, then $x^{n} \\in \\operatorname{Ker} f$ for every $x \\in G$.\n-/\ntheorem pow_mem_ker_of_card_eq {G H : Type*} [Group G] [Group H] (f : G →* H) (n : ℕ)\n    (h : Nat.card f.range = n) : ∀ g : G, (g ^ n) ∈ f.ker := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 11,
+    "informal_statement": "In any ring $R$ and $a,b,c\\in R$, $a(b-c)=a b-a c$ and $(b-c) a=b a-c a$.",
+    "formal_statement": "import Mathlib\n\n/--\nIn any ring $R$ and $a,b,c\\in R$, $a(b-c)=a b-a c$ and $(b-c) a=b a-c a$.\n-/\ntheorem mul_sub_and_sub_mul {R : Type*} [Ring R] (a b c : R) :\n    a * (b - c) = a * b - a * c ∧ (b - c) * a = b * a - c * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 12,
+    "informal_statement": "Let $R$ be a ring with unit. Then there is a unique homomorphism $f:\\mathbb Z\\to R$ such that $1\\mapsto 1_R$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a ring with unit. Then there is a unique homomorphism\n$f:\\mathbb Z\\to R$ such that $1\\mapsto 1_R$.\n-/\ntheorem existUnique_ringHom_int {R : Type*} [Ring R] : ∃! f : ℤ →+* R, True := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 13,
+    "informal_statement": "Let $R$ be a ring, and suppose that $a^3=a, \\forall a\\in R$. Prove that $R$ is commutative.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a ring, and suppose that $a^3=a, \\forall a\\in R$. Prove that $R$ is commutative.\n-/\ntheorem commutative_of_relations {R : Type*} [Ring R] : (∀ a : R, a ^ 3 = a) →\n    ∀ (a b : R), a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 14,
+    "informal_statement": "In an integral domain $R$, if $a\\in R$ and natural number $n\\in\\mathbb N$ satisfy $a^n=0$, then $a=0$.",
+    "formal_statement": "import Mathlib\n\n/--\nIn an integral domain $R$, if $a\\in R$ and natural number $n\\in\\mathbb N$ satisfy $a^n=0$,\nthen $a=0$.\n-/\ntheorem zero_of_pow_eq_zero {R : Type*} [Ring R] [IsDomain R] (a : R) (n : ℕ)\n    (eq : a ^ n = 0) : a = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 15,
+    "informal_statement": "Let $R$ be a ring with identity $1$ and $x$ be an element not equal to zero. If there exists $y \\in R$ s.t. $xy = 1$ and $z \\in R$ s.t. $zx = 1$, then $y=z$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a ring with identity $1$ and $x$ be an element not equal to zero. If there exists\n$y \\in R$ s.t. $xy = 1$ and $z \\in R$ s.t. $zx = 1$, then $y=z$.\n-/\ntheorem left_right_inverse_eq {R : Type*} [Ring R] {x : R} (hx : x ≠ 0) :\n    ∃ y, x * y = 1 → ∃ z, z * x = 1 → y = z := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 16,
+    "informal_statement": "Suppose $R$ is an integral domain, show that for two element $r_1,r_2\\in R$, the principal ideals $r_1R=r_2R$ iff there exists $u\\in R^\\times$ s.t. $r_1=ur_2$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $R$ is an integral domain, show that for two element $r_1,r_2\\in R$, the principal ideals $r_1R=r_2R$ iff there exists $u\\in R^\\times$ s.t. $r_1=ur_2$.\n-/\ntheorem Ideal.span_eq_iff_associated {R : Type*} [CommRing R] [IsDomain R] (r₁ r₂ : R) :\n    Ideal.span {r₁} = Ideal.span {r₂} ↔ ∃ u : R, IsUnit u ∧ r₁ = u * r₂ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 17,
+    "informal_statement": "Suppose that $R$ is a commutative ring with identity. For a subset $S$ of $R$, let $\\operatorname{Span}(S)$ be the minimal ideal containing elements in $S$. Prove that\n\n$\\operatorname{Span}(S)=\\left\\{\\sum_{s\\in S'}r_ss|S'\\text{ is a finite subset of }S,r_s\\in R\\ \\forall s\\in S'\\right\\}.$\n\nIn other words, prove that the latter one is an ideal and any ideal containing $S$ also contains the right-hand-side.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $R$ is a commutative ring with identity. For a subset $S$ of $R$,\nlet $\\operatorname{Span}(S)$ be the minimal ideal containing elements in $S$. Prove that\n$\\operatorname{Span}(S)=\\left\\{\\sum_{s\\in S'}r_ss|S'\\text{ is a finite subset of }S,r_s\\in R\\ \\forall s\\in S'\\right\\}.$\nIn other words, prove that the latter one is an ideal and any ideal containing $S$\nalso contains the right-hand-side.\n-/\ntheorem ideal_span_eq_diagonal_map_sum {R : Type*} [CommRing R] (S : Set R) :\n    (Ideal.span S) = {x : R | ∃ T : Multiset (R × S),\n      x = Multiset.sum (Multiset.map (fun (x : R × S) ↦ (x.1 : R) * (x.2 : R)) T)} := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 18,
+    "informal_statement": "Let $R$ be a commutative ring with identity and $I_1$ and $I_2$ be two ideals of $R$. Assume that $I$ is an ideal containing $I_1$ and $I_2$, prove that $I$ contains $I_1+I_2$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a commutative ring with identity and $I_1$ and $I_2$ be two ideals of $R$.\nAssume that $I$ is an ideal containing $I_1$ and $I_2$, prove that $I$ contains $I_1+I_2$.\n-/\ntheorem Ideal.add_le_of_le {R : Type*} [CommRing R] (I : Ideal R) (J : Ideal R) (K : Ideal R)\n    (h₁ : I ≤ K) (h₂ : J ≤ K) : I + J ≤ K := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 19,
+    "informal_statement": "For positive integer $n\\ge 2$, show that the ring $\\mathbb Z/n\\mathbb Z$ is a field if and only if $n$ is a prime number.",
+    "formal_statement": "import Mathlib\n\n/--\nFor positive integer $n\\ge 2$, show that the ring $\\mathbb Z/n\\mathbb Z$ is a field if and only if\n$n$ is a prime number.\n-/\ntheorem ZMod.isField_iff_prime (n : ℕ) : IsField (ZMod n) ↔ Nat.Prime n := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 20,
+    "informal_statement": "In a field $F$, as a ring, it has only ideals $(0)=\\{0\\},(1)=F$.",
+    "formal_statement": "import Mathlib\n\n/--\nIn a field $F$, as a ring, it has only ideals $(0)=\\{0\\},(1)=F$.\n-/\ntheorem Field.ideal_eq_bot_or_top {F : Type*} [Field F] (I : Ideal F) : I = 0 ∨ I = ⊤ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 21,
+    "informal_statement": "In a field $F$, for $a\\in F^\\times, b\\in F$, the equation $ax+b=0$ has a unique solution.",
+    "formal_statement": "import Mathlib\n\n/--\nIn a field $F$, for $a\\in F^\\times, b\\in F$, the equation $ax+b=0$ has a unique solution.\n-/\ntheorem existUnique_linear_solution {F : Type*} [Field F] {a : Fˣ} {b : F} :\n    ∃! x, a * x + b = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 22,
+    "informal_statement": "Prove that an algebraically closed field must be an infinite field.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that an algebraically closed field must be an infinite field.\n-/\ntheorem infinite_of_isAlgClosed {F : Type*} [Field F] [IsAlgClosed F] : Infinite F := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 23,
+    "informal_statement": "Let $R$ be a finite commutative ring with identity. Then every prime ideal $I$ of $R$ is maximal.",
+    "formal_statement": "import Mathlib\n\n/-\nLet $R$ be a finite commutative ring with identity. Then every prime ideal $I$ of $R$ is maximal.\n-/\ntheorem isMaximal_of_isPrime_of_fintype {R : Type*} [CommRing R] [Fintype R]\n    (I : Ideal R) (hI : I.IsPrime) : I.IsMaximal := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 24,
+    "informal_statement": "Let $R$ be an integral domain. An element $p \\in R$ is a prime element if and only if the principal ideal $\\langle p \\rangle$ is a nonzero prime ideal of $R$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be an integral domain. An element $p \\in R$ is a prime element if and only if the principal\nideal $\\langle p \\rangle$ is a nonzero prime ideal of $R$.\n-/\ntheorem isPrime_singleton {R : Type*} [CommRing R] [IsDomain R] {p : R} (hp : p ≠ 0) :\n    Ideal.IsPrime (Ideal.span {p}) ↔ Prime p:= by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 25,
+    "informal_statement": "Let $R$ be a commutative ring with identity, and let $P_1, \\dots, P_m$ be prime ideals of $R$. \nIf $A$ is an ideal of $R$ such that \n\\[ A \\subseteq P_1 \\cup \\cdots \\cup P_m, \\] \nthen there exists some $i$ ($1 \\leq i \\leq m$) for which $A \\subseteq P_i$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a commutative ring with identity, and let $P_1, \\dots, P_m$ be prime ideals of $R$.\nIf $A$ is an ideal of $R$ such that\n\\[ A \\subseteq P_1 \\cup \\cdots \\cup P_m, \\]\nthen there exists some $i$ ($1 \\leq i \\leq m$) for which $A \\subseteq P_i$.\n-/\ntheorem primeAvoidance {R : Type} [CommRing R] (A : Ideal R) (m : ℕ)\n    (P : Fin (m + 1) → Ideal R)\n    (pp : ∀ i : Fin (m + 1), (P i).IsPrime)\n    (hA : A.carrier ⊆ ⋃ (i : Fin (m + 1)), P i) :\n    ∃ i : Fin (m + 1), A.carrier ⊆ P i := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 26,
+    "informal_statement": "Let $D$ be an integral domain, and let $m, n$ be coprime positive integers. If $a, b \\in D$ satisfy $a^m = b^m$ and $a^n = b^n$, then $a = b$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $D$ is integral domain, $m$ and $n$ are coprime positive integers.\nProve that for any $a, b \\in D$, if $a^{m}=b^{m}$ and $a^{n}=b^{n}$, we have $a=b$\n-/\ntheorem eq_of_pow_eq_of_coPrime {R : Type*} [Ring R] [IsDomain R] (a b : R) (m n : ℕ) (hm : m > 0)\n    (hn : n > 0) (hmn : m.Coprime n) (h₁ : a ^ m = b ^ m) (h₂ : a ^ n = b ^ n) : a = b := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 27,
+    "informal_statement": "If $D$ is an integral domain but not a field, then the polynomial ring $D[x]$ is not a principal ideal domain (PID).",
+    "formal_statement": "import Mathlib\n\nopen Polynomial\n\n/--\nIf $D$ is an integral domain but not a field, then the polynomial ring $D[x]$ is not a principal\nideal domain (PID).\n-/\ntheorem Polynomial.not_isPrincipalIdealRing {D : Type*} [CommRing D] [IsDomain D] (not_field : ¬ IsField D) : ¬ (IsPrincipalIdealRing D[X]) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 28,
+    "informal_statement": "Let $E/F$ and $K/F$ be normal extensions. Then the composite extension $EK/F$ is also normal.",
+    "formal_statement": "import Mathlib\n\n/-\nSuppose $E / F$ and $K / F$ are normal extension. Prove that $E K / F$ is normal extension too.\n-/\ntheorem IntermediateField.normal_of_normal_normal\n    {F F₀ : Type*} [Field F] [Field F₀] [Algebra F F₀]\n    (E K : IntermediateField F F₀) [Normal F E] [Normal F K]\n    [Normal F E] [Normal F K] :\n  Normal F (E ⊔ K : IntermediateField F F₀) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 29,
+    "informal_statement": "Let $A \\leq G$ be a subgroup of $G$. Then $C_G(C_G(C_G(A))) = C_G(A)$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $A \\leq G$ be a subgroup of $G$. Then $C_G(C_G(C_G(A))) = C_G(A)$.\n-/\ntheorem Subgroup.centralizer_centralizer_centralizer {G : Type*} [Group G]\n    (A A₁ A₂ A₃: Subgroup G) (h₁ : A₁= Subgroup.centralizer A)\n    (h₂ : A₂ = Subgroup.centralizer A₁) (h₃ : A₃ = Subgroup.centralizer A₂) : A₁ = A₃ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 30,
+    "informal_statement": "The order of a permutation is equal to the least common multiple of the lengths of its disjoint cycles in the cycle decomposition.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nThe order of a permutation is equal to the least common multiple of the lengths of its disjoint cycles\nin the cycle decomposition.\n-/\ntheorem lcm_eq_orderOf {α : Type*} [Fintype α] [DecidableEq α] (σ : Equiv.Perm α) :\n    σ.cycleType.lcm = orderOf σ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 31,
+    "informal_statement": "Show that $G L_{n}(F)$ is non-abelian for any $n \\geq 2$ and any $F$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that $G L_{n}(F)$ is non-abelian for any $n \\geq 2$ and any $F$.\n-/\ntheorem GL_not_commutative {F : Type*} [Field F] {n : ℕ} (h : n ≥ 2) :\n    ∃ a b : (GL (Fin n) F) , a * b ≠ b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 32,
+    "informal_statement": "Let $G$ be a finite group which possesses an automorphism $\\sigma$ (cf. Exercise 20) such that $\\sigma(g)=g$ if and only if $g=1$. If $\\sigma^{2}$ is the identity map from $G$ to $G$, prove that $G$ is abelian (such an automorphism $\\sigma$ is called fixed point free of order 2).",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a finite group which possesses an automorphism $\\sigma$ such that $\\sigma(g)=g$\nif and only if $g=1$. If $\\sigma^{2}$ is the identity map from $G$ to $G$, prove that $G$ is\nabelian (such an automorphism $\\sigma$ is called fixed point free of order 2).\n-/\ntheorem commutative_of_idempotent_mulEquiv {G : Type*} [Group G] [Finite G] (σ : MulEquiv G G)\n    (h : ∀ g, σ g = g ↔ g = 1) (ids : σ ∘ σ = id) : ∀ a b : G, a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 33,
+    "informal_statement": "Prove that in a Boolean ring, every prime ideal is a maximal ideal.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that in a Boolean ring, every prime ideal is a maximal ideal.\n-/\ntheorem BooleanRing.isMaximal_of_isPrime {R : Type*} [BooleanRing R] {I : Ideal R}\n    (hi : I.IsPrime) : I.IsMaximal := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 34,
+    "informal_statement": "Prove that $C_{G}(A)=\\left\\{g \\in G \\mid g^{-1} a g=a\\right.$ for all $\\left.a \\in A\\right\\}$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that $C_{G}(A)=\\left\\{g \\in G \\mid g^{-1} a g=a\\right.$ for all $\\left.a \\in A\\right\\}$.\n-/\ntheorem Subgroup.centralizer_eq {G : Type*} {A : Set G} [Group G] :\n    Subgroup.centralizer A = {g : G | ∀ a ∈ A, g⁻¹ * a * g = a} := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 35,
+    "informal_statement": "Prove that the set of complex numbers fixed  conjugation is the set of real numbers",
+    "formal_statement": "import Mathlib\n\nopen ComplexConjugate\n\n/--\nProve that the set of complex numbers fixed conjugation is the set of real numbers\n-/\ntheorem conj_fixedPoint_eq : {z : ℂ | conj z = z} = {z : ℂ | ∃ (x : ℝ), z = x} := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 36,
+    "informal_statement": "Assume $R$ is commutative. Prove that if $P$ is a prime ideal of $R$ and $P$ contains no zero divisors then $R$ is an integral domain.",
+    "formal_statement": "import Mathlib\n\n/--\nAssume $R$ is commutative. Prove that if $P$ is a prime ideal of $R$ and $P$ contains no zero\ndivisors then $R$ is an integral domain.\n-/\ntheorem isDomain_of_ideal_isPrime_noZeroDivisors {R : Type*} [CommRing R]\n    {P : Ideal R} [Nontrivial P] (_ : P.IsPrime)\n    (hz : ∀ a : P, ∀ b : R, a * b = 0 → a = 0 ∨ b = 0) : IsDomain R := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 37,
+    "informal_statement": "Prove that $R$ is a P.I.D. if and only if $R$ is a U.F.D. that is also a Bezout Domain. ",
+    "formal_statement": "import Mathlib\n\n/-\nProve that $R$ is a P.I.D. if and only if $R$ is a U.F.D. that is also a Bezout Domain.\n-/\ntheorem isPrincipalIdealRing_iff_uniqueFactorizationMonoid_and_isBezout\n    {R : Type*} [CommRing R] [IsDomain R] :\n    IsPrincipalIdealRing R ↔ UniqueFactorizationMonoid R ∧ IsBezout R := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 38,
+    "informal_statement": "Let $H \\leq G$ and let $g \\in G$. Prove that if the right coset $H g$ equals some left coset of $H$ in $G$ then it equals the left coset $g H$ and $g$ must be in $N_{G}(H)$.",
+    "formal_statement": "import Mathlib\n\nopen Pointwise\n\n/--\nLet $H \\leq G$ and let $g \\in G$. Prove that if the right coset $H g$ equals some left coset of\n$H$ in $G$ then it equals the left coset $g H$ and $g$ must be in $N_{G}(H)$.\n-/\ntheorem coset_eq_and_mem_normalizer {G : Type*} [Group G] (H : Subgroup G) {g : G}\n    (h : ∃ g' : G, MulOpposite.op g • H = g' • H.carrier) :\n    MulOpposite.op g • H = g • H.carrier ∧ g ∈ Subgroup.normalizer H := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 39,
+    "informal_statement": "Let $G$ be a group, and $a, b \\in G$. For any positive integer $n$ we define $a^{n}$ by $a^{n}=\\underbrace{a a a \\cdots a}_{n \\text { factors }}$\n\nIf there is an element $x \\in G$ such that $a=x^{2}$, we say that $a$ has a square root in $G$. Similarly, if $a=y^{3}$ for some $y \\in G$, we say $a$ has a cube root in $G$. In general, $a$ has an $n$th root in $G$ if $a=z^{n}$ for some $z \\in G$. Prove\n$1\\left(b a b^{-1}\\right)^{n}=b a^{n} b^{-1}$, for every positive integer Prove by induction. ",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group, and $a, b \\in G$. For any positive integer $n$ we define $a^{n}$ by\n$a^{n}=\\underbrace{a a a \\cdots a}_{n \\text { factors }}$\nIn general, $a$ has an $n$th root in $G$ if $a=z^{n}$ for some $z \\in G$. Prove\n$1\\left(b a b^{-1}\\right)^{n}=b a^{n} b^{-1}$, for every positive integer.\n-/\ntheorem conj_pow_eq_pow_conj {G : Type} [Group G] (a b : G) (n : ℕ) :\n    (b * a * b⁻¹) ^ n = b * a ^ n * b⁻¹ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 40,
+    "informal_statement": "Show that every integer $z$ is generated by 5 and 7.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that every integer $z$ is generated by 5 and 7.\n-/\ntheorem int_eq_five_seven_span : ∀ z : ℤ, ∃ a b : ℤ, z = a * 5 + b * 7 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 41,
+    "informal_statement": "Suppose $g=(a, b) \\in G \\times H$, where $a$ has order $m$ and $b$ has order $n$. Prove that $\\operatorname{ord}(g)=\\operatorname{LCM}(m,n)$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $g=(a, b) \\in G \\times H$, where $a$ has order $m$ and $b$ has order $n$.\nProve that $\\operatorname{ord}(g)=\\operatorname{LCM}(m,n)$.\n-/\ntheorem orderOf_prod {G H : Type*} [Group G] [Group H] {a : G} {b : H} :\n    orderOf (a, b) = Nat.lcm (orderOf a) (orderOf b) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 42,
+    "informal_statement": "Suppose $(c, d) \\in G \\times H$, where $c$ has order $m$ and $d$ has order $n$. Prove: If $m$ and $n$ are not relatively prime (hence have a common factor $q>1$ ), then the order of $(c, d)$ is less than $m n$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $(c, d) \\in G \\times H$, where $c$ has order $m$ and $d$ has order $n$.\nProve: If $m$ and $n$ are not relatively prime (hence have a common factor $q>1$ ),\nthen the order of $(c, d)$ is less than $m n$.\n-/\ntheorem orderOf_prod_lt_orderOf_mul (G H : Type*) [Group G] [Group H] (c : G) (d : H)\n    (h : (orderOf c).gcd (orderOf d) > 1) :\n    orderOf (c, d) < (orderOf c) * (orderOf d) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 43,
+    "informal_statement": "In a ring with unity, prove that if $a$ is nilpotent, then $a+1$ and $a-1$ are both invertible.",
+    "formal_statement": "import Mathlib\n\n/--\nIn a ring with unity, prove that if $a$ is nilpotent, then $a+1$ and $a-1$ are both invertible.\n-/\ntheorem invertible_of_nilpotent {R : Type*} [Ring  R] (a : R) (h : IsNilpotent a) :\n    IsUnit (1 + a) ∧ IsUnit (1 - a) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 44,
+    "informal_statement": "Let $A$ be an integral domain. Let $a \\in A$. If $A$ has characteristic $\\mathrm{p}$, and $\\mathrm{n} \\cdot a=0$ where $\\mathrm{n}$ is not a multiple of $\\mathrm{p}$, then $a=0$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $A$ be an integral domain. Let $a \\in A$. If $A$ has characteristic $\\mathrm{p}$, and\n$\\mathrm{n} \\cdot a=0$ where $\\mathrm{n}$ is not a multiple of $\\mathrm{p}$, then $a=0$.\n-/\ntheorem zero_of_smul_eq_zero {A : Type*} [CommRing A] [IsDomain A] {p : ℕ} {a : A}\n    [Fact p.Prime] [CharP A p] (hn : n • a = 0) (hnp : ¬ p ∣ n) : a = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 45,
+    "informal_statement": "Let $A \\subseteq B$ where $A$ and $B$ are integral domains. Prove: $A$ has characteristic $\\mathrm{p}$ iff $B$ has characteristic $\\mathrm{p}$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $A \\subseteq B$ where $A$ and $B$ are integral domains. Prove: $A$ has characteristic\n$\\mathrm{p}$ iff $B$ has characteristic $\\mathrm{p}$.\n-/\ntheorem ringChar_eq_prime_iff [CommRing B] [IsDomain B] (A : Subring B) : (ringChar B = p) ↔ (ringChar A = p) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 46,
+    "informal_statement": "Suppose $a(x)$ and $b(x)$ have degree $<n$. If $a(c)=b(c)$ for $n$ values of $c$, prove that $a(x)=b(x)$.",
+    "formal_statement": "import Mathlib\n\nopen Polynomial\n\n/--\nSuppose $a(x)$ and $b(x)$ have degree $ < n$. If $a(c)=b(c)$ for $n$ values of $c$,\nprove that $a(x)=b(x)$.\n-/\ntheorem Polynomial.eq_of_roots_eq {R : Type*} [CommRing R] [IsDomain R] {n : ℕ} (a b : R[X])\n    (ha : degree a < n) (hb : degree b < n) (hc : Multiset.card (roots (a - b)) = n) : a = b := by\n\n  by_contra t\n  --We prove this problem by using the reductio ad absurdum.\n  have h : a - b ≠ 0 := by exact sub_ne_zero_of_ne t\n  --First of all,   if $a \\neq b$, then  $a-b \\neq 0$.\n  have h1 : Multiset.card (roots (a - b)) ≤ (a - b).degree := by exact card_roots h\n  --By using a corollary of the fundamental theorem of algebra, we immediately know that the number of the roots of $a-b$ less than or equal to the degree of it.\n  have h2 : (a + (-b)).degree ≤  max a.degree (-b).degree := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 47,
+    "informal_statement": "Let $U$ and $V$ have the same dimension $n$. Prove that $h$ is injective iff $h$ is surjective.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $U$ and $V$ have the same dimension $n$. Prove that $h$ is injective iff $h$ is surjective.\n-/\ntheorem LinearMap.injective_iff_surjective_of_finiteDimentional\n    {K : Type} [Field K] {U V : Type} [AddCommGroup U] [Module K U] [AddCommGroup V]\n    [Module K V] [FiniteDimensional K U] [FiniteDimensional K V]\n    (h : Module.finrank K U = Module.finrank K V) (f : U →ₗ[K] V) :\n    Function.Injective f ↔ Function.Surjective f := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 48,
+    "informal_statement": "Suppose that $G$ is a group and $a, b \\in G$ satisfy $a * b=b * a^{\\prime}$ where as usual, $a^{\\prime}$ is the inverse for $a$. Prove that $b * a=a^{\\prime} * b$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $G$ is a group and $a, b \\in G$ satisfy $a * b=b * a^{\\prime}$ where as usual,\n$a^{\\prime}$ is the inverse for $a$. Prove that $b * a=a^{\\prime} * b$.\n-/\ntheorem relations_of_relations {G : Type*} [Group G] (a b : G) (h : a * b = b * a⁻¹) :\n    b * a = a⁻¹ * b := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 49,
+    "informal_statement": "Suppose that $G$ is a group and $a$ and $b$ are elements of $G$ that satisfy $a * b=b * a^{3}$. Then the element $(a * b)^{2}$ can be written in the form $b^{k} a^{r}$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $G$ is a group and $a$ and $b$ are elements of $G$ that satisfy $a * b=b * a^{3}$.\nThen the element $(a * b)^{2}$ can be written in the form $b^{k} a^{r}$.\n-/\ntheorem mul_pow_two_eq_of_relation {G : Type*} [Group G] (a b : G) (h : a * b = b * (a ^ 3)) :\n    ∃ k r : ℕ, (a * b) ^ 2 = b ^ k * a ^ r := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 50,
+    "informal_statement": "Let $G$ be a group with a finite number of elements. Show that for any $a \\in G$, there exists an $n \\in \\mathbb{Z}^{+}$such that $a^{n}=e$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group with a finite number of elements. Show that for any $a \\in G$,\nthere exists an $n \\in \\mathbb{Z}^{+}$such that $a^{n}=e$.\n-/\ntheorem exist_pow_eq_one {G : Type*} [Group G] [Fintype G] :\n    ∀ a : G, ∃ n : ℕ, n ≠ 0 ∧ a ^ n = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 51,
+    "informal_statement": "Show that if $(a * b)^{2}=a^{2} * b^{2}$ for $a$ and $b$ in a group $G$, then $a * b=b * a$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that if $(a * b)^{2}=a^{2} * b^{2}$ for $a$ and $b$ in a group $G$, then $a * b=b * a$.\n-/\ntheorem mul_comm_of_relation {G : Type*} [Group G] (a b : G) (h : (a * b) ^ 2 = a ^ 2 * b ^ 2) :\n    a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 52,
+    "informal_statement": "Let $G$ be a group and suppose that $a * b * c=e$ for $a, b, c \\in G$. Show that $b * c * a=e$ also.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group and suppose that $a * b * c=e$ for $a, b, c \\in G$. Show that $b * c * a=e$ also.\n-/\ntheorem mul_mul_eq_one {G : Type*} [Group G] (a b c : G) (h : a * b * c = 1) : b * c * a = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 53,
+    "informal_statement": "Prove that for any integer $n \\geq 3, S_{n}$ has a subgroup isomorphic with $D_{n}$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that for any integer $n \\geq 3, S_{n}$ has a subgroup isomorphic with $D_{n}$.\n-/\ntheorem DihedralGroup.mulEquiv_equiv_perm_subgroup(n : ℕ) (h : n ≥ 3) :\n    ∃ (D : Subgroup (Equiv.Perm (Fin n))), Nonempty (DihedralGroup n ≃* D) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 54,
+    "informal_statement": "Prove that if $G$ is a cyclic group and $|G| \\geq 3$, then $G$ has at least 2 generators.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that if $G$ is a cyclic group and $|G| \\geq 3$, then $G$ has at least 2 generators.\n-/\ntheorem exist_two_generators {G : Type*} [Group G] [Fintype G] [hc : IsCyclic G]\n    (h : Fintype.card G ≥ 3) :\n    ∃ g₁ g₂ : G, g₁ ≠ g₂ ∧ Subgroup.zpowers g₁ = ⊤ ∧ Subgroup.zpowers g₂ = ⊤ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 55,
+    "informal_statement": "Show that a group with no proper nontrivial subgroups is cyclic.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that a group with no proper nontrivial subgroups is cyclic.\n-/\ntheorem isCyclic_of_subgroup_eq_bot_or_top {G : Type*} [Group G]\n    (h : ∀ H : Subgroup G, H = ⊥ ∨ H = ⊤) : IsCyclic G := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 56,
+    "informal_statement": "Show that $\\mathbb{Z}_{p}$ has no proper nontrivial subgroups if $p$ is a prime number.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that $\\mathbb{Z}_{p}$ has no proper nontrivial subgroups if $p$ is a prime number.\n-/\ntheorem ZMod.subgroup_eq_bot_or_top_of_prime {G : Type} [Group G] [Fintype G] (H : Subgroup G)\n    (p : ℕ) [Fact p.Prime] (hGp : Fintype.card G = p) : H = ⊥ ∨ H = ⊤ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 57,
+    "informal_statement": "Consider $S_{n}$ for a fixed $n \\geq 2$ and let $\\sigma$ be a fixed odd permutation. Show that every odd permutation in $S_{n}$ is a product of $\\sigma$ and some permutation in $A_{n}$.",
+    "formal_statement": "import Mathlib\n\n/--\nConsider $S_{n}$ for a fixed $n \\geq 2$ and let $\\sigma$ be a fixed odd permutation.\nShow that every odd permutation in $S_{n}$ is a product of $\\sigma$ and some permutation in $A_{n}$.\n-/\ntheorem odd_eq_alternatingGroup_mul (n : ℕ) (σ : Equiv.Perm (Fin n))\n    (odd : Equiv.Perm.sign σ = -1) : ∀ τ : Equiv.Perm (Fin n), Equiv.Perm.sign τ = -1 →\n    ∃ (π : Equiv.Perm (Fin n)), π ∈ alternatingGroup (Fin n) ∧ τ = σ * π := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 58,
+    "informal_statement": "Show that if $\\sigma$ is a cycle of odd length, then $\\sigma^{2}$ is a cycle.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that if $\\sigma$ is a cycle of odd length, then $\\sigma^{2}$ is a cycle.\n-/\ntheorem Equiv.Perm.pow_two_isCycle_of_odd (n : ℕ) (f : Equiv.Perm (Fin n))\n    (cyc : Equiv.Perm.IsCycle f) (oddcyc : Odd (orderOf f)) : Equiv.Perm.IsCycle (f ^ 2) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 59,
+    "informal_statement": "Prove that if a finite abelian group has order a power of a prime $p$, then the order of every element in the group is a power of $p$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that if a finite abelian group has order a power of a prime $p$,\nthen the order of every element in the group is a power of $p$.\n-/\ntheorem orderOf_eq_pow_of_card_pow {G : Type*} [CommGroup G] [Fintype G] (hp : p.Prime)\n    (order : Fintype.card G = p ^ n) :\n    ∀ (g : G), ∃ k ≤ n, orderOf g = p ^ k := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 60,
+    "informal_statement": "Let $H$ be a subgroup of a group $G$ such that $g^{-1} h g \\in H$ for all $g \\in G$ and all $h \\in H$. Show that every left coset $g H$ is the same as the right coset $\\mathrm{Hg}$.",
+    "formal_statement": "import Mathlib\n\nopen scoped Pointwise\n\nopen MulOpposite\n\n/--\nLet $H$ be a subgroup of a group $G$ such that $g^{-1} h g \\in H$ for all $g \\in G$ and all\n$h \\in H$. Show that every left coset $g H$ is the same as the right coset $\\mathrm{Hg}$.\n-/\ntheorem leftCoset_eq_rightCoset_of_cong_mem {G : Type*} [Group G] (H : Subgroup G)\n    (h : ∀ (h : H), ∀ (g : G), g * h * g⁻¹ ∈ H) :\n    ∀ (g : G),  g • (H : Set G) = op g • (H : Set G) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 61,
+    "informal_statement": "Show that an intersection of normal subgroups of a group $G$ is again a normal subgroup of $G$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that an intersection of normal subgroups of a group $G$ is again a normal subgroup of $G$.\n-/\ntheorem Subgroup.inf_normal_of_normal {G : Type*} [Group G]\n    (M : Subgroup G) [hM : M.Normal] (N : Subgroup G) [hN: N.Normal] :\n    (M ⊓ N).Normal := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 62,
+    "informal_statement": "Show that if $H$ and $K$ are normal subgroups of a group $G$ such that $H \\cap K=\\{e\\}$, then $h k=k h$ for all $h \\in H$ and $k \\in K$. [Hint: Consider the commutator $h k h^{-1} k^{-1}=\\left(h k h^{-1}\\right) k^{-1}=h\\left(k h^{-1} k^{-1}\\right)$.]",
+    "formal_statement": "import Mathlib\n\nopen Pointwise\n\n/--\nShow that if $H$ and $K$ are normal subgroups of a group $G$ such that $H \\cap K=\\{e\\}$, then\n$h k=k h$ for all $h \\in H$ and $k \\in K$.\n-/\ntheorem mul_comm_of_normal_inf_eq_bot {G : Type*} [Group G] (N K : Subgroup G)\n    [nN : N.Normal] [nK : K.Normal] (h1 : N ⊓ K = ⊥)\n    {n k : G} (nin : n ∈ N) (kin : k ∈ K) : n * k = k * n := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 63,
+    "informal_statement": "Show that $\\operatorname{Aut}(\\mathbb{Q})$ is a group with only a single element.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that $\\operatorname{Aut}(\\mathbb{Q})$ is a group with only a single element.\n-/\ntheorem ringAut_rat_card_eq_one : Nat.card (RingAut ℚ) = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 64,
+    "informal_statement": "Suppose that $G$ is a group and $g, h \\in G$. Prove that $g x=h$ has a unique solution; likewise, prove that $x g=h$ has a unique solution.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $G$ is a group and $g, h \\in G$. Prove that $g x=h$ has a unique solution;\nlikewise, prove that $x g=h$ has a unique solution.\n-/\ntheorem existUnique_inverse {G : Type*} [Group G] (g h : G) :\n    ∃! x, g * x = h ∧ ∃! x, x * g = h := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 65,
+    "informal_statement": "Prove that in a group, every element has exactly one inverse.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that in a group, every element has exactly one inverse.\n-/\ntheorem existUnique_inverse {G : Type*} [Group G] {g : G} : ∃! (h : G), g * h = 1 ∧ h * g = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 66,
+    "informal_statement": "Let $G$ be a group, and $a, b, c \\in G$. Prove that the equation $a x c=b$ has a unique solution in $G$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group, and $a, b, c \\in G$.\nProve that the equation $a x c=b$ has a unique solution in $G$.\n-/\ntheorem existUnique_mul_eq {G : Type*} [Group G] (a b c : G) : ∃! x : G, a * x * b = c := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 67,
+    "informal_statement": "Suppose that $G$ and $H$ are groups with operations $\\circ$ and $*$ and suppose $g, k \\in G$ are inverses; that is, $g \\circ k=e_{G}$. If $\\varphi: G \\rightarrow H$ is a group isomorphism, prove that $\\varphi(g)$ and $\\varphi(k)$ are inverses in $H$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $G$ and $H$ are groups with operations $\\circ$ and $*$ and suppose\n$g, k \\in G$ are inverses; that is, $g \\circ k=e_{G}$. If $\\varphi: G \\rightarrow H$ is a group\nisomorphism, prove that $\\varphi(g)$ and $\\varphi(k)$ are inverses in $H$.\n-/\ntheorem MonoidHom.map_inv_eq_inv_map {G H : Type*} [Group G] [Group H] (φ : G →* H)\n    (g k : G) (hgk : g = k⁻¹) : φ g = (φ k)⁻¹ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 68,
+    "informal_statement": "Explain why the order of $g^{-1}$ is the same as $g$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that the order of $g^{-1}$ is the same as $g$.\n-/\ntheorem orderOf_inv_eq_orderOf {G : Type*} [Group G] (a : G) : orderOf a = orderOf (a⁻¹) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 69,
+    "informal_statement": "A finite group cannot be isomorphic to a proper subgroup of itself.",
+    "formal_statement": "import Mathlib\n\n/--\nA finite group cannot be isomorphic to a proper subgroup of itself.\n-/\ntheorem not_mulEquiv_subgroup_of_finite {G : Type} [Fintype G][Group G] (H : Subgroup G)\n    (h1 : H < ⊤) : Nonempty (G ≃* H) → False:= by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 70,
+    "informal_statement": "Let $R$ be a finite ring, and consider its additive group and its group of units. Show that these two groups cannot be isomorphic.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nLet $R$ be a finite ring, and consider its additive group and its group of units.\nShow that these two groups cannot be isomorphic.\n-/\ntheorem not_mulEquiv_units {R : Type} [Fintype R] [Ring R] (h1 : Nontrivial R) :\n    (Multiplicative R ≃* Rˣ) → False := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 71,
+    "informal_statement": "Prove that every subgroup of a cyclic group is cyclic.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that every subgroup of a cyclic group is cyclic.\n-/\ntheorem subgroup_isCyclic_of_isCyclic {G : Type*} [Group G] {H : Subgroup G} (h : IsCyclic G) :\n    IsCyclic H := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 72,
+    "informal_statement": "Prove that if $G$ is a finite cyclic group with more than two elements, then $G$ has more than one element whose order equals to $|G|$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that if $G$ is a finite cyclic group with more than two elements,\nthen $G$ has more than one element whose order equals to $|G|$.\n-/\ntheorem exists_elements_with_max_order {G : Type*} [Group G] [IsCyclic G] [Fintype G]\n    (hG_card : Fintype.card G > 2) :\n    ∃ a b : G, a ≠ b ∧ orderOf a = Fintype.card G ∧ orderOf b = Fintype.card G := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 73,
+    "informal_statement": "If $G$ is a finite group where every non-identity element is a generator of $G$, show that the order of $G$ is prime or $1$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $G$ is a finite group where every non-identity element is a generator of $G$,\nshow that the order of $G$ is prime or $1$.\n-/\ntheorem card_prime_or_one_of_generator {G : Type*} [Group G] [Fintype G]\n    (h : ∀ x : G, x ≠ 1 → Subgroup.zpowers x = ⊤) :\n    (Fintype.card G).Prime ∨ Fintype.card G = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 74,
+    "informal_statement": "Show that if $G$ is a group and $H_{1}, H_{2}$ are proper subgroups, then it is impossible that $G=H_{1} \\cup H_{2}$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that if $G$ is a group and $H_{1}, H_{2}$ are proper subgroups, then it is impossible that $G=H_{1} \\cup H_{2}$.\n-/\ntheorem Subgroup.union_neq_top {G : Type*} [Group G] (H₁ H₂ : Subgroup G) (p₁ : H₁ ≠ ⊤) (p₂ : H₂ ≠ ⊤) :\n    ¬ (H₁.carrier ∪ H₂.carrier = ⊤) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 75,
+    "informal_statement": "Suppose that $G$ is a group for which every element has order a power $p^{n}$ of a fixed prime $p$. Let $\\varphi: G \\rightarrow H$ be a surjective homomorphism. Prove that $H$ is a $p$-group too.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $G$ is a group for which every element has order a power $p^{n}$ of a fixed prime $p$.\nLet $\\varphi: G \\rightarrow H$ be a surjective homomorphism. Prove that $H$ is a $p$-group too.\n-/\ntheorem IsPGroup_of_surjective {G H : Type*} {p : ℕ} [Group G] [Group H] [Fact p.Prime]\n    (gp : IsPGroup p G) (f : G →* H) (sf : Function.Surjective f) : IsPGroup p H := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 76,
+    "informal_statement": "If $H$ is a subgroup of $G$ and two cosets of $H$ share an element, then these two cosets are equal.",
+    "formal_statement": "import Mathlib\n\nopen Pointwise\n\n/--\nIf $H$ is a subgroup of $G$ and two cosets of $H$ share an element, then these two cosets are equal.\n-/\ntheorem cosets_eq_of_inter_ne_empty {G : Type*} [Group G] (H : Subgroup G) (a b : G) :\n    (a • (H : Set G)) ∩ (b • (H : Set G)) ≠ ∅ →\n    QuotientGroup.mk (s := H) a = QuotientGroup.mk (s := H) b  := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 77,
+    "informal_statement": "Suppose that $G$ is an infinite group, and $H$ is a subgroup of $G$ with finitely many elements. Then there are infinitly many distinct cosets of $H$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose that $G$ is an infinite group, and $H$ is a subgroup of $G$ with finitely many elements.\nThen there are infinitly many distinct cosets of $H$.\n-/\ntheorem quotient_infinite {G : Type*} [Group G] (H : Subgroup G)\n    (hH : Finite H) (hG : Infinite G) : Infinite (G ⧸ H) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 78,
+    "informal_statement": "Let $G$ be a group of order $p^{2}$, where $p$ is prime. Show that every proper subgroup of $G$ is cyclic.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group of order $p^{2}$, where $p$ is prime.\nShow that every proper subgroup of $G$ is cyclic.\n-/\ntheorem Subgroup.isCyclic_of_card_eq_primt_pow_two {G : Type*} [Group G] [Fintype G] (p : ℕ)\n    (hp : Nat.Prime p) (h : Fintype.card G = p ^ 2) : ∀ H : Subgroup G, H < ⊤ → IsCyclic H := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 79,
+    "informal_statement": "In the proof of Lemma 38.1 we needed to show that $x^{3}-2$ has only one real root; we did this using algebra. Prove this result using calculus.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that $x^{3}-2$ has only one real root.\n-/\ntheorem Real.existUnique_pow_three_eq_two : ∃! x : ℝ, x ^ 3 = 2 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 80,
+    "informal_statement": "Show that an $r$-cycle is an even permutation if and only if $r$ is odd.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that an $r$-cycle is an even permutation if and only if $r$ is odd.\n-/\ntheorem isCycle_sign_one_iff_odd {α : Type*} [Fintype α] [DecidableEq α] (r : ℕ) {σ : Equiv.Perm α}\n    (h1 : σ.IsCycle) (h2 : σ.support.card = r) : Equiv.Perm.sign σ = 1 ↔ Odd (r) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 81,
+    "informal_statement": "Prove, for all $i$, that $\\alpha \\in S_{n}$ moves $i$ if and only if $\\alpha^{-1}$ moves $i$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve, for all $i$, that $\\alpha \\in S_{n}$ moves $i$ if and only if $\\alpha^{-1}$ moves $i$.\n-/\ntheorem Equiv.Perm.fix_iff_inv_fix {u : Type*} (α : Equiv.Perm u) (i : u) :\n    α i ≠ i ↔ α⁻¹ i ≠ i := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 82,
+    "informal_statement": "Give an example of $\\alpha, \\beta, \\gamma \\in S_{5}$, none of which is the identity (1), with $\\alpha \\beta=\\beta \\alpha$ and $\\alpha \\gamma=\\gamma \\alpha$, but with $\\beta \\gamma \\neq \\gamma \\beta$.",
+    "formal_statement": "import Mathlib\n\n/--\nGive an example of $\\alpha, \\beta, \\gamma \\in S_{5}$, none of which is the identity (1),\nwith $\\alpha \\beta=\\beta \\alpha$ and $\\alpha \\gamma=\\gamma \\alpha$,\nbut with $\\beta \\gamma \\neq \\gamma \\beta$.\n-/\ntheorem equiv_not_commutative : ∃ α β γ : Equiv.Perm (Fin 5), α ≠ 1 ∧ β ≠ 1 ∧ γ ≠ 1 ∧\n    α * β = β * α ∧ α * γ = γ * α ∧ β * γ ≠ γ * β := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 83,
+    "informal_statement": "Let $G$ be a group and let $a \\in G$ have order $p k$ for some prime $p$, where $k \\geq 1$. Prove that if there is $x \\in G$ with $x^{p}=a$, then the order of $x$ is $p^{2} k$, and hence $x$ has larger order than $a$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group and let $a \\in G$ have order $p k$ for some prime $p$, where $k \\geq 1$.\nProve that if there is $x \\in G$ with $x^{p}=a$, then the order of $x$ is $p^{2} k$, and hence\n$x$ has larger order than $a$.\n-/\ntheorem orderOf_eq_pow_two_mul {G : Type*} [Group G] (a : G) (x : G) (k : ℕ) [Fact p.Prime]\n    (h₀ : k ≥ 1) (h :orderOf a = p * k) (hp: x ^ p = a) :\n    orderOf x = (p ^ 2) * k := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 84,
+    "informal_statement": "Prove that every element in a dihedral group $D_{2 n}$ has a unique factorization of the form $a^{i} b^{j}$, where $0 \\leq i<n$ and $j=0$ or 1 .",
+    "formal_statement": "import Mathlib\n\n/--\nProve that every element in a dihedral group $D_{2 n}$ has a unique factorization of the\nform $a^{i} b^{j}$, where $0 \\leq i < a$ and $j=0$ or 1.\n-/\ntheorem DihedralGroup.eq_r_or_sr (g : DihedralGroup n) :\n    ∃ (t : ZMod n) , g = (DihedralGroup.r t) ∨ g = (DihedralGroup.sr t) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 85,
+    "informal_statement": "If $H$ and $K$ are subgroups of a group $G$ and if $|H|$ and $|K|$ are relatively prime, prove that $H \\cap K=\\{1\\}$.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nIf $H$ and $K$ are subgroups of a group $G$ and if $|H|$ and $|K|$ are relatively prime,\nprove that $H \\cap K=\\{1\\}$.\n-/\ntheorem inf_eq_bot_of_card_coprime {G : Type*} [Group G] [Fintype G] (H : Subgroup G) (K : Subgroup G)\n    (h : Nat.Coprime (Fintype.card H) (Fintype.card K)) : H ⊓ K = ⊥ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 86,
+    "informal_statement": "Let $G$ be a group of order 4. Prove that either $G$ is cyclic or $x^{2}=1$ for every $x \\in G$. Conclude that $G$ must be abelian.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group of order 4. Prove that $G$ must be abelian.\n-/\ntheorem commutative_of_card_eq_four {G : Type*} [Group G] [Fintype G] (h : Fintype.card G = 4) :\n    ∀ a b : G, a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 87,
+    "informal_statement": "If $f: G \\rightarrow H$ is a homomorphism and if $(|G|,|H|)=1$, prove that $f(x)=1$ for all $x \\in G$",
+    "formal_statement": "import Mathlib\n\n/--\nIf $f: G \\rightarrow H$ is a homomorphism and if $(|G|,|H|)=1$, prove that $f(x)=1$ for all $x \\in G$.\n-/\ntheorem forall_coe_one_of_card_coprime {G H : Type*} [Group G] [Group H] (f : G →* H) [Fintype G] [Fintype H]\n    (h : (Fintype.card G).Coprime (Fintype.card H)) : ∀ x : G, f x = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 88,
+    "informal_statement": "Let $G$ be a finite group written multiplicatively. Prove that if $|G|$ is odd, then every $x \\in G$ has a unique square root; that is, there exists exactly one $g \\in G$ with $g^{2}=x$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a finite group written multiplicatively. Prove that if $|G|$ is odd, then every\n$x \\in G$ has a unique square root; that is, there exists exactly one $g \\in G$ with $g^{2}=x$.\n-/\ntheorem existUnique_square_root_of_odd_card {G : Type u} [Fintype G] [Group G]\n    (hg : Odd (Fintype.card G)) : ∀ (x : G), ∃! (y : G), y ^ 2 = x := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 89,
+    "informal_statement": "Prove that $|\\operatorname{Aut}(Z/pZ)|=p-1$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that $|\\operatorname{Aut}(Z/pZ)|=p-1$.\n-/\ntheorem ZMod.addAut_card_eq_prime_sub_one {p : ℕ} [Fact p.Prime] :\n    Nat.card (AddAut (ZMod p)) = p - 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 90,
+    "informal_statement": "If $G$ is a group and $G / Z(G)$ is cyclic, where $Z(G)$ denotes the center of $G$, prove that $G$ is abelian; that is, $G=Z(G)$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $G$ is a group and $G / Z(G)$ is cyclic, where $Z(G)$ denotes the center of $G$,\nprove that $G$ is abelian; that is, $G=Z(G)$.\n-/\ntheorem comm_of_isCyclic_center_quotient {G : Type} [Group G]\n    (h : IsCyclic (G ⧸ (Subgroup.center G))) : ∀ a b : G, a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 91,
+    "informal_statement": "Let $R$ be a ring, and suppose there exists a positive even integer $n$ such that $x^{n}=x$ for all $x \\in R$. Prove that $-x=x$ for all $x \\in R$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a ring, and suppose there exists a positive even integer $n$ such that $x^{n}=x$ for all\n$x \\in R$. Prove that $-x=x$ for all $x \\in R$.\n-/\ntheorem neg_eq_self_of_even_pow_eq_self {R : Type*} [Ring R] [Nontrivial R] {n : ℕ} [NeZero n]\n    (h : ∀ x : R, x ^ (2 * n) = x) : ∀ x : R, x = -x := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 92,
+    "informal_statement": "Let $R$ be a commutative ring, and let $p(x), f(x)$, and $g(x)$ be polynomials in $R[x]$. Prove that if $p(x)$ divides both $f(x)$ and $g(x)$ in $R[x]$, then for any polynomials $u(x)$ and $v(x)$ in $R[x]$, $p(x)$ divides $f(x) u(x)+g(x) v(x)$.",
+    "formal_statement": "import Mathlib\n\nopen Polynomial\n\n/--\nLet $R$ be a commutative ring, and let $p(x), f(x)$, and $g(x)$ be polynomials in $R[x]$.\nProve that if $p(x)$ divides both $f(x)$ and $g(x)$ in $R[x]$,\nthen for any polynomials $u(x)$ and $v(x)$ in $R[x]$, $p(x)$ divides $f(x) u(x)+g(x) v(x)$.\n-/\ntheorem combination_dvd {R : Type*} [CommRing R] (p f g : R[X]) (pdvd : p ∣ f ∧ p ∣ g) :\n    ∀ u v : R[X], p ∣ f * u + g * v := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 93,
+    "informal_statement": "Let $S$ be a set having an operation $*$ which assigns an element $a * b$ of $S$ for any $a, b \\in S$. Let us assume that the following two rules hold:\n\n1. If $a, b$ are any objects in $S$, then $a * b=a$.\n\n2. If $a, b$ are any objects in $S$, then $a * b=b * a$.\n\nShow that $S$ can have at most one object.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $S$ be a set having an operation $*$ which assigns an element $a * b$ of $S$ for any\n$a, b \\in S$. Let us assume that the following two rules hold:\n\n1. If $a, b$ are any objects in $S$, then $a * b=a$.\n\n2. If $a, b$ are any objects in $S$, then $a * b=b * a$.\n\nShow that $S$ can have at most one object.\n-/\ntheorem cardinal_le_one_of_relations {S : Type*} [Mul S] (h₁ : ∀ (a b : S), a * b = a)\n    (h₂ : ∀ (a b : S),a * b = b * a) : Subsingleton S := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 94,
+    "informal_statement": "Show that $a \\in Z(G)$ if and only if $C(a)=G$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that $a \\in Z(G)$ if and only if $C(a)=G$.\n-/\ntheorem mem_center_iff_centralizer_eq_top {G : Type*} [Group G] (a : G) :\n    a ∈ Subgroup.center G ↔ Subgroup.centralizer {a} = ⊤ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 95,
+    "informal_statement": "If $M$ is a subgroup of $G$ such that $x^{-1} M x \\subset M$ for all $x \\in G$, prove that actually $x^{-1} M x=M$.",
+    "formal_statement": "import Mathlib\n\nopen MulOpposite Pointwise\n\n/--\nIf $M$ is a subgroup of $G$ such that $x^{-1} M x \\subset M$ for all $x \\in G$, prove that actually $x^{-1} M x=M$.\n-/\ntheorem leftCoset_eq_self_of_subset {G : Type*} [Group G] (M:Subgroup G)\n    (sub : ∀ (x : G), op x • (x⁻¹ • (M : Set G)) ⊆ (M : Set G)) :\n    (∀ (x : G),(op x) • (x⁻¹ • (M : Set G)) = (M : Set G)):= by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 96,
+    "informal_statement": "If $p$ is a prime, show that the only solutions of $x^{2} \\equiv 1 \\bmod p$ are $x \\equiv$ $1 \\bmod p$ or $x \\equiv-1 \\bmod p$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $p$ is a prime, show that the only solutions of $x^{2} \\equiv 1 \\bmod p$ are $x \\equiv$\n$1 \\bmod p$ or $x \\equiv-1 \\bmod p$.\n-/\ntheorem pow_two_mod_prime_one {p : ℕ} [Fact p.Prime] (x : ℕ) :\n    x ^ 2 ≡ 1 [MOD p] → x - 1 ≡ 0 [MOD p] ∨ x + 1 ≡ 0 [MOD p] := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 97,
+    "informal_statement": "Let $G$ be a group such that all subgroups of $G$ are normal in $G$. If $a, b \\in G$, prove that $b a=a^{j} b$ for some $j$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group such that all subgroups of $G$ are normal in $G$. If $a, b \\in G$,\nprove that $b a=a^{j} b$ for some $j$.\n-/\ntheorem mul_eq_pow_mul_of_normal (G : Type*) [Group G] (h : ∀ N : Subgroup G, N.Normal) :\n    ∀ a b : G, ∃ j : ℤ, b * a = a ^ j * b := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 98,
+    "informal_statement": "Prove that a group of order $p^{2}, p$ a prime, has a normal subgroup of order $p$.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nProve that a group of order $p^{2}, p$ a prime, has a normal subgroup of order $p$.\n-/\ntheorem exist_subgroup_normal_of_card_prime_pow_two {G : Type*} {p : ℕ} [Group G] [Fintype G]\n    (pp : p.Prime) (ord : Fintype.card G = p ^ 2) :\n    ∃ P : Subgroup G, (P.Normal) ∧ (Fintype.card P = p) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 99,
+    "informal_statement": "If $G$ is a group and $N \\triangleleft G$ is such that $G / N$ is abelian, prove that $a b a^{-1} b^{-1} \\in N$ for all $a, b \\in G$",
+    "formal_statement": "import Mathlib\n\n/--\nIf $G$ is a group and $N \\triangleleft G$ is such that $G / N$ is abelian,\nprove that $a b a^{-1} b^{-1} \\in N$ for all $a, b \\in G$\n-/\ntheorem commutator_mem_of_quotient_commutative {G : Type*} [Group G] (N : Subgroup G) [N.Normal]\n    (hc : ∀ a b : (G ⧸ N), a * b = b * a) : ∀ a b : G, a * b * a⁻¹ * b⁻¹ ∈ N := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 100,
+    "informal_statement": "If $G$ is a group and $H \\triangleleft G$, show that if $a \\in G$ has finite order $o(a)$, then $H a$ in $G / H$ has finite order $m$, where $m \\mid o(a)$. ",
+    "formal_statement": "import Mathlib\n\n/--\nIf $G$ is a group and $H \\triangleleft G$, show that if $a \\in G$ has finite order $o(a)$,\nthen $H a$ in $G / H$ has finite order $m$, where $m \\mid o(a)$.\n-/\ntheorem QuotientGroup.orderOf_dvd {G : Type*} [Group G] (H : Subgroup G) [H.Normal] (a : G)\n    (h : 0 < orderOf a) : (orderOf <| QuotientGroup.mk (s := H) a) ∣ orderOf a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 101,
+    "informal_statement": "Let $A$ be a normal subgroup of a group $G$, and suppose that $b \\in G$ is an element of prime order $p$, and that $b \\notin A$. Show that $A \\cap(b)=(e)$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $A$ be a normal subgroup of a group $G$, and suppose that $b \\in G$ is an element of\nprime order $p$, and that $b \\notin A$. Show that $A \\cap(b)=(e)$.\n-/\ntheorem inf_zpowers_eq_bot_of_orderOr_prime {G : Type*} [Group G] (A : Subgroup G) [A.Normal]\n    (b : G) (hb : (orderOf b).Prime) (h4 : b ∉ A) : A ⊓ (Subgroup.zpowers b) = ⊥ := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 102,
+    "informal_statement": "If $|G|=p^{3}$ and $|Z(G)| \\geq p^{2}$, prove that $G$ is abelian.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nIf $|G|=p^{3}$ and $|Z(G)| \\geq p^{2}$, prove that $G$ is abelian.\n-/\ntheorem commutative_of_center_card_eq_prime_pow_three {G : Type*} {p : ℕ} [Group G] [Fintype G]\n    (pp : p.Prime) (p3 : Fintype.card G = p ^ 3) (p2 : Fintype.card (Subgroup.center G) ≥ p ^ 2) :\n    ∀ a b : G, a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 103,
+    "informal_statement": "If $P \\triangleleft G, P$ a $p$-Sylow subgroup of $G$, prove that $\\varphi(P)=P$ for every automorphism $\\varphi$ of $G$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $P \\triangleleft G, P$ a $p$-Sylow subgroup of $G$,\nprove that $\\varphi(P)=P$ for every automorphism $\\varphi$ of $G$.\n-/\ntheorem sylow_fixedBy_mulEquiv {G : Type*} {p : ℕ} [Group G] [Fintype G] [Fact p.Prime] (P : Sylow p G) [pn : P.Normal]\n    (φ : G ≃* G) : φ '' P = P := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 104,
+    "informal_statement": "If $N \\triangleleft G$, let $B(N)=\\{x \\in G \\mid x a=a x$ for all $a \\in N\\}$. Prove that $B(N) \\triangleleft G$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $N \\triangleleft G$, let $B(N)=\\{x \\in G \\mid x a=a x$ for all $a \\in N\\}$.\nProve that $B(N) \\triangleleft G$.\n-/\ntheorem centralizer_normal (G : Type) [Group G] (N : Subgroup G) [nh : N.Normal] :\n    (Subgroup.centralizer (N : Set G)).Normal := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 105,
+    "informal_statement": "If $P$ is a $p$-Sylow subgroup of $G$, show that $N(N(P))=N(P)$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $P$ is a $p$-Sylow subgroup of $G$, show that $N(N(P))=N(P)$.\n-/\ntheorem Sylow.normalizer_normalizer_eq_normalizer {G : Type*} [Group G] {p : ℕ} [Fact (Nat.Prime p)]\n    [Finite (Sylow p G)] (P : Sylow p G) : P.normalizer.normalizer = P.normalizer := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 106,
+    "informal_statement": "If $|G|=p^{n}$, show that $G$ has a subgroup of order $p^{m}$ for all $1 \\leq m \\leq n$.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nIf $|G|=p^{n}$, show that $G$ has a subgroup of order $p^{m}$ for all $1 \\leq m \\leq n$.\n-/\ntheorem exists_subgroup_card_prime_pow_of_card_prime_pow {G : Type} [Group G] [Fintype G] (p n : ℕ)\n    [Fact p.Prime] (hG : Fintype.card G = p ^ n) :\n    ∀ (m : ℕ), 1 ≤ m ∧ m ≤ n →  ∃ N : Subgroup G, Fintype.card N = p ^ m := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 107,
+    "informal_statement": "Prove that for any permutation $\\sigma, \\sigma \\tau \\sigma^{-1}$ is a transposition if $\\tau$ is a transposition.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that for any permutation $\\sigma, \\sigma \\tau \\sigma^{-1}$ is a transposition if $\\tau$ is a transposition.\n-/\ntheorem cong_isSwap_of_Swap {α : Type*} [Fintype α] [DecidableEq α] (f : Equiv.Perm α) (g : Equiv.Perm α)\n    (hg : Equiv.Perm.IsSwap g) : Equiv.Perm.IsSwap (f * g * f⁻¹) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 108,
+    "informal_statement": "Prove that if $\\tau_{1}, \\tau_{2}$, and $\\tau_{3}$ are transpositions, then $\\tau_{1} \\tau_{2} \\tau_{3} \\neq e$, the identity element of $S_{n}$.",
+    "formal_statement": "import Mathlib\n\nopen Equiv Equiv.Perm\n\n/--\nProve that if $\\tau_{1}, \\tau_{2}$, and $\\tau_{3}$ are transpositions, then\n$\\tau_{1} \\tau_{2} \\tau_{3} \\neq e$, the identity element of $S_{n}$.\n-/\ntheorem IsSwap.mul_mul_mul_ne_one (n : ℕ)\n    (τ₁ : Perm (Fin n)) (τ₂ : Perm (Fin n)) (τ₃ : Perm (Fin n))\n    (h₁ : IsSwap τ₁) (h₂ : IsSwap τ₂) (h₃ : IsSwap τ₃) : τ₁ * τ₂ * τ₃ ≠ 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 109,
+    "informal_statement": "If $R$ is an integral domain and $a b=a c$ for $a \\neq 0, b, c \\in R$, show that $b=c$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $R$ is an integral domain and $a b=a c$ for $a \\neq 0, b, c \\in R$, show that $b=c$.\n-/\ntheorem mul_left_cancel_of_NoZeroDivisors {R :Type*} [Ring R] [NoZeroDivisors R]\n    (a b c : R) (h₁ : ¬ a = 0 ∧ a * b = a * c) : b = c := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 110,
+    "informal_statement": "If $R$ is a ring and $e \\in R$ is such that $e^{2}=e$, show that $(x e-e x e)^{2}=0$ for every $x \\in R$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $R$ is a ring and $e \\in R$ is such that $e^{2}=e$, show that $(x e-e x e)^{2}=0$ for every $x \\in R$.\n-/\ntheorem pow_two_zero_of_relations {R : Type*} [Ring R] (e : R) (h : e * e = e) :\n    ∀ x : R, (x * e - e * x * e) ^ 2 = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 111,
+    "informal_statement": "If $a^{2}=0$ in $R$, show that $a x+x a$ commutes with $a$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $a^{2}=0$ in $R$, show that $a x+x a$ commutes with $a$.\n-/\ntheorem commute_of_pow_two_zero (R : Type) [Ring R] (a : R) (h : a ^ 2 = 0) :\n    ∀ x : R, Commute (a * x + x * a) a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 112,
+    "informal_statement": "Let $R$ be a ring with 1 . An element $a \\in R$ is said to have a left inverse if $b a=1$ for some $b \\in R$. Show that if the left inverse $b$ of $a$ is unique, then $a b=1$ (so $b$ is also a right inverse of $a$ ).",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a ring with 1 . An element $a \\in R$ is said to have a left inverse if $b a=1$ for\nsome $b \\in R$. Show that if the left inverse $b$ of $a$ is unique, then $a b=1$\n(so $b$ is also a right inverse of $a$).\n-/\ntheorem right_inverse_of_unique_left_inverse {R : Type*} [Ring R] {a b : R} (h₁ : b * a = 1)\n    (h₂ : ∀ c : R, c * a = 1 → c = b) : a * b = 1 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 113,
+    "informal_statement": "Show that for every positive integer $n$, $X^n -2$ is an irreducible polynomial over the integers.",
+    "formal_statement": "import Mathlib\n\nopen Polynomial\n\n/--\nShow that for every positive integer $n$, $X^n -2$ is an irreducible polynomial over the integers.\n-/\ntheorem irreducible_X_pow_n_minus_two (n : ℕ) (npos : 1 ≤ n) : Irreducible (X ^ n - 2 : ℤ[X]) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 114,
+    "informal_statement": "If $H$ and $K$ are subgroups of a group $G$, then $H \\cup K$ cannot be a subgroup unless $H \\subseteq K$ or $K \\subseteq H$.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $H$ and $K$ are subgroups of a group $G$, then $H \\cup K$ cannot be a subgroup\nunless $H \\subseteq K$ or $K \\subseteq H$.\n-/\ntheorem union_subgroup_iff_le {G : Type*} [Group G] {A B : Subgroup G} :\n    (∃ C : Subgroup G , C = (A ∪ B : Set G)) ↔ A ≤ B ∨ B ≤ A := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 115,
+    "informal_statement": "   $R$ is a relation on set $A$, $R^{-1} := \\{ (x,y) ~|~ (y,x) \\in R\\}$, prove that $R$ is transitive if and only if $R^{-1}$ is transitive.  ",
+    "formal_statement": "import Mathlib\n\n\n/--\n$R$ is a relation on set $A$, $R^{-1} := \\{ (x,y) ~|~ (y,x) \\in R\\}$,\nprove that $R$ is transitive if and only if $R^{-1}$ is transitive.\n-/\ntheorem transitive_iff {A : Type} (R : A → A → Prop) :\n  (Transitive R) ↔ (Transitive (fun x y => R y x)) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 116,
+    "informal_statement": "   In any ring $R$ and $a,b\\in R$, if $a b=-b a$, then $(a+b)^{2}=(a-b)^{2}=a^{2}+b^{2}$.  ",
+    "formal_statement": "import Mathlib\n\n/--\nIn any ring $R$ and $a,b\\in R$, if $a b=-b a$, then $(a+b)^{2}=(a-b)^{2}=a^{2}+b^{2}$.\n-/\ntheorem pow_add_pow_eq {R : Type*} (a b : R) [Ring R]\n    (h : a * b = - (b * a)) :\n    (a + b) ^ 2 = a ^ 2 + b ^ 2 ∧ (a - b) ^ 2 = a ^ 2 + b ^ 2  := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 117,
+    "informal_statement": "   Let $R$ be a commutative ring, and suppose $a^2=b^3=0$ for some $a, b \\in R$. Show that $(a+b)^4 = 0$.  ",
+    "formal_statement": "import Mathlib\n\n/--\n   Let $R$ be a commutative ring, and suppose $a^2=b^3=0$ for some $a, b \\in R$. Show that $(a+b)^4 = 0$.\n-/\ntheorem add_pow_four_eq_zero {R : Type*} [CommRing R] (a b : R)\n    (h1 : a ^ 2 = 0) (h2 : b ^ 3 = 0) : (a + b) ^ 4 = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 118,
+    "informal_statement": "   Let $R$ be a commutative ring. $a,b\\in R$ are nilpotent. Prove that $a+b$ is also nilpotent.  ",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a commutative ring. $a,b\\in R$ are nilpotent. Prove that $a+b$ is also nilpotent.\n-/\ntheorem isNilpotent_add_of_isNilpotent {R : Type*} [CommRing  R] (a b : R)\n    {h₁ : IsNilpotent a} {h₂ : IsNilpotent b}: IsNilpotent (a + b) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 119,
+    "informal_statement": "   Let $R_1$ be a commutative ring with identity $1$ and $R_2$ be an integral domain. Let $f: R_1 \\rightarrow R_2$ be a ring homomorphism, prove that $\\operatorname{Ker}(f)$ is a prime ideal in $R_1$.  ",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R_1$ be a commutative ring with identity $1$ and $R_2$ be an integral domain.\nLet $f: R_1 \\rightarrow R_2$ be a ring homomorphism, prove that $\\operatorname{Ker}(f)$ is a\nprime ideal in $R_1$.\n-/\ntheorem ker_isPrime_of_isDomain {R R' F: Type*} [CommRing R] [CommRing R'] [IsDomain R']\n    (f : R →+* R') : Ideal.IsPrime (RingHom.ker f) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 120,
+    "informal_statement": "Let $a, b$ be any two elements of a group $G$. If $a$, $b$ commute with their commutator $[a, b]$, then for all integers $m$ and $n$,\n\\[\n[a^m, b^n] = [a, b]^{mn}.\n\\]",
+    "formal_statement": "import Mathlib\n\n/--\nLet $a, b$ be any two elements of a group $G$. If $a$, $b$ commute with their commutator $[a, b]$,\nthen for all integers $m$ and $n$,\n\\[\n[a^m, b^n] = [a, b]^{mn}.\n\\]\n-/\ntheorem pow_commutator_eq_commutator_pow_mul {G : Type*} [Group G] (a b : G)\n    (ha : Commute a ⁅a, b⁆) (hb : Commute b ⁅a, b⁆) :\n    ∀ m n : ℕ, ⁅a ^ m, b ^ n⁆ = ⁅a, b⁆ ^ (m * n) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 121,
+    "informal_statement": "Let $\\alpha$ be an automorphism of a group $G$ such that $g^{-1}\\alpha(g) \\in Z(G)$ for all $g \\in G$. Then $\\alpha$ acts trivially on the derived subgroup $G'$, i.e., $\\alpha(a) = a$ for all $a \\in G'$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $G$ is a group and $\\alpha$ is an automorphism of G. Prove that if for any $g \\in G, g^{-1} \\alpha(g) \\in Z(G)$, then for any $a $ in $G^{\\prime}$, we have $\\alpha(a)=a$.\n-/\ntheorem fixedBy_commutator_of_conj_mem_center {G : Type*} [Group G] (α : G ≃* G)\n    (h : ∀ g, g⁻¹ * α g ∈ Subgroup.center G) : ∀ a ∈ commutator G, α a = a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 122,
+    "informal_statement": "Let $A$ and $B$ be two non-empty subsets of a finite group $G$. If $|A| + |B| > |G|$, then $G = AB$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $A$ and $B$ be two non-empty subsets of a finite group $G$. If $|A| + |B| > |G|$, then $G = AB$.\n-/\ntheorem sum_eq_top_of_card_add_gt {G : Type*} [Group G] [Finite G] (A B : Set G) [ha : Nonempty A] [hb : Nonempty B]\n    (h : A.ncard + B.ncard > (⊤ : Set G).ncard) :\n    (⊤ : Set G) = {g | ∃ a ∈ A, ∃ b ∈ B, g = a * b} := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 123,
+    "informal_statement": "The additive group of rational numbers $\\mathbb{Q}$ is not a cyclic group.",
+    "formal_statement": "import Mathlib\n\n/--\nAddictive group of $\\mathbb{Q}$ is not cyclic.\n-/\ntheorem Rat.not_isAddCyclic : ¬ (IsAddCyclic ℚ) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 124,
+    "informal_statement": "Let $G = G_{1} \\times G_{2}$, and let $H \\triangleleft G$ be a normal subgroup such that $H \\cap G_{i} = \\{1\\}$ for $i = 1, 2$. Prove that $H \\leq Z(G)$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G = G_{1} \\times G_{2}$, and let $H \\triangleleft G$ be a normal subgroup such that\n$H \\cap G_{i} = \\{1\\}$ for $i = 1, 2$. Prove that $H \\leq Z(G)$.\n-/\ntheorem mem_center_of_inter_eq_bot {G₁ G₂ : Type*} [Group G₁] [Group G₂]\n    (H : Subgroup (G₁ × G₂)) (H_Normal : H.Normal)\n    (h₁ : H ⊓ (Subgroup.prod ⊤ ⊥) = ⊥) (h₂ : H ⊓ (Subgroup.prod ⊥ ⊤) = ⊥) :\n    H ≤ Subgroup.center (G₁ × G₂) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 125,
+    "informal_statement": "Let $G$ act on a set $S$. For any $a, b \\in S$, if there exists $g \\in G$ such that $g a = b$, then $G_{a} = g^{-1} G_{b} g$. In other words, the stabilizers of elements in the same orbit are conjugate to each other.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ act on a set $S$. For any $a, b \\in S$, if there exists $g \\in G$ such that $g a = b$,\nthen $G_{a} = g^{-1} G_{b} g$. In other words, the stabilizers of elements in the same orbit are\nconjugate to each other.\n-/\ntheorem conj_stabilizer_eq {G : Type*} [Group G] (S : Type*) [MulAction G S]\n    (a b : S) (g : G) (h : g • a = b) : (MulAction.stabilizer G a) =\n    Subgroup.map (MulAut.conj (G := G) g⁻¹) (MulAction.stabilizer G b) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 126,
+    "informal_statement": "Let $N$ be a normal subgroup of $G$ such that $N \\cap [G, G] = \\{1\\}$. Then $N$ is contained in the center of $G$, i.e., $N \\leq Z(G)$.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $N \\triangleleft G, N \\cap[G, G]=\\{1\\}$. Then $N \\leqslant Z(G)$.\n-/\ntheorem le_center_of_inf_commutator_eq_bot {G : Type*} [Group G] (N : Subgroup G) [hN : N.Normal]\n    (h : N ⊓ (commutator G) = ⊥) : N ≤ Subgroup.center G := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 127,
+    "informal_statement": "Let $G$ be a monoid with identity. An element $b \\in G$ is the inverse of $a \\in G$ if and only if the following relations hold:\n\\[ a b a = a \\quad \\text{and} \\quad a b^2 a = 1. \\]",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a monoid with identity. An element $b \\in G$ is the inverse of $a \\in G$ if and only if\nthe following relations hold:\n\\[ a b a = a \\quad \\text{and} \\quad a b^2 a = 1. \\]\n-/\ntheorem inverse_iff_relations {G : Type*} [Monoid G] (a b : G) :\n    (b * a = 1 ∧ a * b = 1) ↔ (a * b * a = a ∧ a * b ^ 2 * a = 1) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 128,
+    "informal_statement": "Let $n \\in \\mathbb{Z}$ with $n \\geq 3$. Prove the following: $Z\\left(D_{2 n}\\right)=1$ if $n$ is odd.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $n \\in \\mathbb{Z}$ with $n \\geq 3$. Prove the following: $Z\\left(D_{2 n}\\right)=1$\nif $n$ is odd.\n-/\ntheorem DihedralGroup.center_eq_bot_of_odd (n : ℕ) [NeZero n] (ge : n ≥ 2) (h : Odd n) :\n    (Subgroup.center (DihedralGroup n) = ⊥) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 129,
+    "informal_statement": "Prove that if $H$ is a subgroup of $G$ then $\\langle H\\rangle=H$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that if $H$ is a subgroup of $G$ then $\\langle H\\rangle=H$.\n-/\ntheorem Subgroup.closure_eq_self {G : Type*} [Group G] (H : Subgroup G) :\n    Subgroup.closure H.carrier = H := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 130,
+    "informal_statement": "Prove that $Z(G) \\leq N_{G}(A)$ for any subset $A$ of $G$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group, and $A$ is a subgroup of $G$. Show that $Z(G) \\leq N_{G}(A)$.\n-/\ntheorem subgroup_center_le_normalizer {G : Type*} [Group G] (A : Subgroup G) :\n    (Subgroup.center G) ≤ (Subgroup.normalizer A) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 131,
+    "informal_statement": "Let $H$ be a subgroup of order 2 in $G$. Show that $N_{G}(H)=C_{G}(H)$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $H$ be a subgroup of order 2 in $G$. Show that $N_{G}(H)=C_{G}(H)$.\n-/\ntheorem normalizer_eq_centralizer_of_subgroup_orderOf_two\n    {G : Type*} [Group G] (H : Subgroup G) (h : Nat.card H = 2) :\n    (Subgroup.center G) = (Subgroup.normalizer H) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 132,
+    "informal_statement": "Show that a ring $R$ has no nonzero nilpotent element if and only if 0 is the only solution of $x^{2}=0$ in $R$.",
+    "formal_statement": "import Mathlib\n\n/--\nShow that a ring $R$ has no nonzero nilpotent element if and only if 0 is the only solution\nof $x^{2}=0$ in $R$.\n-/\ntheorem has_no_nilpotent_iff_zero_of_pow_two_zero {R : Type*} [Ring R] :\n    (∀ x : R, ∀ k : ℕ, x ≠ 0 → x ^ k ≠ 0) ↔ (∀ x : R, x ^ 2 = 0 → x = 0) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 133,
+    "informal_statement": "$\\mathbb{Q}[x] /\\left\\langle x^{2}-5 x+6\\right\\rangle$ is not a field.",
+    "formal_statement": "import Mathlib\n\nopen Polynomial\n\n/--\n$\\mathbb{Q}[x] /\\left\\langle x^{2}-5 x+6\\right\\rangle$ is not a field.\n-/\ntheorem not_isField_quotient_ideal_span : ¬ IsField (ℚ[X] ⧸ Ideal.span {(X ^ 2 - 5 * X + 6 : ℚ[X])}) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 134,
+    "informal_statement": "Show that if $H$ is a normal subgroup of $G$ and $H$ is a $p$-group, then $H$ is contained in every Sylow $p$-subgroup of $G$.",
+    "formal_statement": "import Mathlib\n\nvariable [Group G] [Finite G]\n\n-- Every Sylow $p$ group of $G$ is finite.\ninstance : Finite (Sylow p G) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 135,
+    "informal_statement": "Prove that $1^{3}+2^{3}+\\cdots+n^{3}=\\frac{1}{4} n^{4}+\\frac{1}{2} n^{3}+\\frac{1}{4} n^{2}$.",
+    "formal_statement": "import Mathlib\n\nopen BigOperators\n\n/--\nProve that $1^{3}+2^{3}+\\cdots+n^{3}=\\frac{1}{4} n^{4}+\\frac{1}{2} n^{3}+\\frac{1}{4} n^{2}$.\n-/\ntheorem Finset.sum_cubic (n : ℕ) :\n    ((∑ i ∈ Finset.range (n + 1), i ^ 3) : ℚ) =\n    ((n : ℚ) ^ 4 / 4) + ((n : ℚ) ^ 3 / 2) + ((n : ℚ) ^ 2 / 4) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 136,
+    "informal_statement": "If $a$ and $b$ are positive integers with $(a, b)=1$, and if $a b$ is a square, prove that both $a$ and $b$ are squares.",
+    "formal_statement": "import Mathlib\n\n/--\nIf $a$ and $b$ are positive integers with $(a, b)=1$, and if $a b$ is a square,\nprove that both $a$ and $b$ are squares.\n-/\ntheorem isSquare_of_mul_isSquare_of_isCoprime {a b : ℤ} (hab : IsCoprime a b)\n    (pos : a > 0 ∧ b > 0) (hn : IsSquare (a * b)) : IsSquare a ∧ IsSquare b := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 137,
+    "informal_statement": "Let $G$ be a group and regard $G \\times G$ as the direct product of $G$ with itself. If the multiplication $\\mu: G \\times G \\rightarrow G$ is a group homomorphism, prove that $G$ must be abelian.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group and regard $G \\times G$ as the direct product of $G$ with itself.\nIf the multiplication $\\mu: G \\times G \\rightarrow G$ is a group homomorphism,\nprove that $G$ must be abelian.\n-/\ntheorem comm_of_diagonal_hom {G : Type*} [Group G] (f : G × G →* G)\n    (h : ∀ x : (G × G), f x = x.1 * x.2) : ∀ a b : G, a * b = b * a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 138,
+    "informal_statement": "Prove that a finite $p$-group $G$ is simple if and only if $|G|=p$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that a finite $p$-group $G$ is simple if and only if $|G|=p$.\n-/\ntheorem IsPGroup.isSimpleGroup_iff_card_eq_prime {G : Type*} [Group G] [Fintype G] {p : ℕ}\n    [Fact (Nat.Prime p)] (h : IsPGroup p G) : IsSimpleGroup G ↔ Fintype.card G = p := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 139,
+    "informal_statement": "Prove that if $G$ is a group and has exactly one subgroup $H$ of order $n$, then $H$ is a normal subgroup of $G$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that if $G$ is a group and has exactly one subgroup $H$ of order $n$,\nthen $H$ is a normal subgroup of $G$.s\n-/\ntheorem normal_of_card_eq_unique {G : Type*} [Group G] {H : Subgroup G}\n    (hH : ∀ K : Subgroup G, (Nat.card K = Nat.card H) → (K = H)) : H.Normal := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 140,
+    "informal_statement": "In a group $G$, show that the intersection of a left coset of $H \\leqq G$ and a left coset of $K \\leqq G$ is either empty or a left coset of $H \\cap K$.",
+    "formal_statement": "import Mathlib\n\nopen Pointwise\n\n/--\nIn a group $G$, show that the intersection of a left coset of $H \\leqq G$ and a left coset of\n$K \\leqq G$ is either empty or a left coset of $H \\cap K$.\n-/\ntheorem leftCoset_inter_eq_bot_or_eq_leftCoset {G : Type*} [Group G] (H K : Subgroup G) (a b : G) :\n    (a • H.carrier) ∩ (b • K) = ⊥ ∨ ∃ c : G,  (a • H.carrier) ∩ (b • K) = c • (H ⊓ K) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 141,
+    "informal_statement": "Prove that every subgroup of a solvable group is solvable.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that every subgroup of a solvable group is solvable.\n-/\ntheorem Subgroup.solvable_of_solvable {G : Type*} [Group G] [IsSolvable G] (H : Subgroup G) :\n    IsSolvable H := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 142,
+    "informal_statement": "Let $f: R \\rightarrow S$ be a ring homomorphism,with $R$ and $S$ commutative. If $P$ is a prime ideal of $S$, show that the preimage $f^{-1}(P)$ is a prime ideal of $R$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $f: R \\rightarrow S$ be a ring homomorphism,with $R$ and $S$ commutative.\nIf $P$ is a prime ideal of $S$, show that the preimage $f^{-1}(P)$ is a prime ideal of $R$.\n-/\ntheorem comap_isPrime_of_isPrime {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) (P : Ideal S)\n    (HP : Ideal.IsPrime P) : Ideal.IsPrime (Ideal.comap f P) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 143,
+    "informal_statement": "Let $G$ be a group, and $a, b \\in G$. For any positive integer $n$ we define $a$ has an $n$th root in $G$ if $a=z^{n}$ for some $z \\in G$. Prove the following: If $a^{3}=e$, then $a$ has a square root.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $G$ be a group, and $a, b \\in G$. For any positive integer $n$ we define $a$ has an\n$n$th root in $G$ if $a=z^{n}$ for some $z \\in G$.\nProve the following: If $a^{3}=e$, then $a$ has a square root.\n-/\ntheorem isSquare_of_pow_three_eq_one {G : Type} [Group G] (a : G) (h : a ^ 3 = 1) :\n    ∃ x : G, x ^ 2 = a := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 144,
+    "informal_statement": "Let $G$ be a finite group, and let $H$ and $K$ be subgroups of $G$. Prove the following: Suppose $H$ and $K$ are not equal, and both have order the same prime number $p$. Then $H \\cap K=\\{e\\}$.",
+    "formal_statement": "import Mathlib\n\nopen Classical\n\n/--\nLet $G$ be a finite group, and let $H$ and $K$ be subgroups of $G$. Prove the following:\nSuppose $H$ and $K$ are not equal, and both have order the same prime number $p$.\nThen $H \\cap K=\\{e\\}$.\n-/\ntheorem inf_eq_bot_of_card_prime {G : Type} [Group G] [Fintype G] (p : ℕ) (H K : Subgroup G) [Fact p.Prime]\n    (hH : Fintype.card H = p) (hK : Fintype.card K = p) (h : H ≠ K) :\n    H ⊓ K = (⊥ : Subgroup G) := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 145,
+    "informal_statement": "Prove that the order of any $p$-group is a power of $p$.",
+    "formal_statement": "import Mathlib\n\n/--\nProve that the order of any $p$-group is a power of $p$.\n-/\ntheorem IsPGroup.card_eq_pow {p : ℕ} {G : Type*} [h₁ : Group G] [Fact (Nat.Prime p)]\n    [h₂ : Fintype G] (h : IsPGroup p G) : ∃ n : ℕ, Fintype.card G = p ^ n := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 146,
+    "informal_statement": "Let $R$ be a commutative ring and $f(x) \\in R[x]$ a polynomial. Then if $f(x)$ is a zero divisor in $R[x]$, there exists a non-zero $a \\in R$ such that $af(x) = 0$.",
+    "formal_statement": "import Mathlib\n\nopen Polynomial\n\n/--\nSuppose $R$ is a commutative ring. Prove that if $f(x)\\in R[x]$ is a zero divisor, then exist $a\\in R^*$ such that $af(x)=0$.\n-/\ntheorem exists_nonzero_scalar_mul_zero_of_zeroDivisor {R : Type*} [CommRing R] (f : R[X]) (_ : f ≠ 0)\n    (h : ∃ g : R[X], g ≠ 0 ∧ g * f = 0) : ∃ a : R, a ≠ 0 ∧ C a * f = 0 := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 147,
+    "informal_statement": "Let $G$ be a finite group of order $p^2q$, where $p$ and $q$ are primes with $p > q$. Then the Sylow $p$-subgroup of $G$ is normal.",
+    "formal_statement": "import Mathlib\n\n/--\nSuppose $|G|=p^2q$ where $p>q$ are primes. Let $P$ be a Sylow $p$-subgroup of $G$, then $P\\lhd G$.\n-/\ntheorem Sylow.normal_of_card_eq_p_pow_two_q {G : Type} [Group G] [Fintype G]\n    {p q : ℕ} (pp : Nat.Prime p) (pq : Nat.Prime q)\n    (h₁ : Fintype.card G = p ^ 2 * q) (h₂ : q < p) (P : Sylow p G): P.Normal := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 148,
+    "informal_statement": "Let $R$ be a commutative ring and $a \\in R$ a non-unit element. Then there exists a maximal ideal $M$ of $R$ containing $a$.",
+    "formal_statement": "import Mathlib\n\n/--\nLet $R$ be a commutative ring and $a \\in R$ a non-unit element.\nThen there exists a maximal ideal $M$ of $R$ containing $a$.\n-/\ntheorem mem_max_ideal_of_not_isUnit {R : Type*} [CommRing R] (a : R) {h₁ : ¬IsUnit a} :\n    ∃ (I : Ideal R), a ∈ I ∧ Ideal.IsMaximal I := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 149,
+    "informal_statement": "If $H$ is a subgroup of $G$ and if $x \\in H$, prove that\n\n$$\nC_{H}(x)=H \\cap C_{G}(x) .\n$$",
+    "formal_statement": "import Mathlib\n\n/--\nIf $H$ is a subgroup of $G$ and if $x \\in H$, prove that $$C_{H}(x)=H \\cap C_{G}(x).$$\n-/\ntheorem Subgroup.centralizer_eq_self_inf_centralizer\n    {G : Type*} [Group G] (H : Subgroup G) (x : H) :\n    Subgroup.map H.subtype (Subgroup.centralizer {x}) = H ⊓ Subgroup.centralizer {x.1} := by\n  sorry",
+    "source": "FATE-M"
+  },
+  {
+    "id": 150,
+    "informal_statement": "Show that $m \\mathbb{Z}$ is a subgroup of $n \\mathbb{Z}$ if and only if $n$ divides $m$. (See Example 7.7.)",
+    "formal_statement": "import Mathlib\n\n/--\nShow that $m \\mathbb{Z}$ is a subgroup of $n \\mathbb{Z}$ if and only if $n$ divides $m$.\n-/\ntheorem zmultiples_le_iff_dvd (m n : ℤ) :\n    (AddSubgroup.zmultiples m : Set ℤ) ≤ AddSubgroup.zmultiples n ↔ n ∣ m := by\n  sorry",
+    "source": "FATE-M"
+  }
+]

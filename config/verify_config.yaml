@@ -1,0 +1,24 @@
+## Verification configuration for Lean-based checking
+## - Provide the path to `lake` and the default Lean workspace
+## - Optionally map multiple Lean versions in `lean_workspaces`
+## - `verify_params` controls timeout, concurrency and method
+
+verification:
+  lake_path : ""
+  lean_workspace: "lean_workspace/v4160"
+  # Multiple workspaces by Lean version
+  lean_workspaces:
+    v4_13_0: "lean_workspace/v4130"
+    v4_16_0: "lean_workspace/v4160"
+    v4_19_0: "lean_workspace/v4190"
+  verify_params:
+    timeout: 300
+    # Optional: cap maximum worker processes/threads; default is min(32, CPU cores)
+    max_workers: 8
+    max_retries: 1
+    method: "lean"
+
+# IO settings
+io:
+  # Output file for verification summary
+  output_file: "logs/lean_verify_results.json"
