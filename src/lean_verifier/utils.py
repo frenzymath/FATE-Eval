@@ -278,7 +278,7 @@ class CodeUtil:
             ('class', formal_classes),
         ]
 
-        # 在进行包含性检查前，对代码与各 formal item 进行统一规范化
+        # Normalization of code and formal items before checking inclusion
         canon_code = CodeUtil.canonicalize_block(normalized_code)
         for kind, items in checks:
             if items:
@@ -313,28 +313,28 @@ class CodeUtil:
     @staticmethod
     def find_lean_theorem_end_pos(lean_code: str) -> int:
         """
-        找到 Lean4 字符串中最后一个 theorem/lemma/instance/example 后紧跟的 `:= by` 或 `:=by` 的结束位置。
+        Find the end position of the last theorem/lemma/instance/example followed by `:= by` or `:=by` in a Lean4 string.
         
-        参数:
-            lean_code: 包含 Lean4 定理和证明的字符串
+        Args:
+            lean_code: The string containing Lean4 theorems and proofs
             
-        返回:
-            最后一个匹配的 `:= by` 或 `:=by` 的结束位置（字符索引，从 0 开始），
-            如果没有找到则返回 -1。
+        Returns:
+            The end position of the last matching `:= by` or `:=by` (character index, starting from 0),
+            or -1 if no match is found.
         """
-        # 匹配 theorem/lemma/instance/example 后跟着 := by 或 :=by
+        # Match theorem/lemma/instance/example followed by := by or :=by
         pattern = r'(?:theorem|lemma|instance|example).*?:=\s*by'
         
-        # 查找所有匹配项
+        # Find all matches
         matches = list(re.finditer(pattern, lean_code, re.DOTALL))
         
         if not matches:
-            return -1  # 没有找到匹配
+            return -1  # No match found
         
-        # 取最后一个匹配
+        # Get the last match
         last_match = matches[-1]
         
-        # 返回匹配的结束位置（即 := by 后的第一个字符的位置）
+        # Return the end position of the last match (the position of the first character after := by)
         return last_match.end()
     
     @staticmethod

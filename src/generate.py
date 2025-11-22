@@ -575,14 +575,14 @@ async def generate_to_file(
     return output_file
     
 async def main():
-    parser = argparse.ArgumentParser(description="只做生成的脚本")
-    parser.add_argument("--model", type=str, required=True, help="要测试的模型名称")
-    parser.add_argument("--dataset", type=str, required=True, help="数据集文件路径")
-    parser.add_argument("--n", type=int, default=10, help="要处理的问题数量")
-    parser.add_argument("--k", type=int, default=1, help="每题尝试次数")
-    parser.add_argument("--api_key", type=str, help="API密钥(如果未提供，将从环境变量读取)")
-    parser.add_argument("--mode", type=str, default="lean", help="使用的prompt类型，默认为lean")
-    parser.add_argument("--concurrency", type=int, default=150, help="最大并发数")
+    parser = argparse.ArgumentParser(description="Scripts for generation only")
+    parser.add_argument("--model", type=str, required=True, help="Name of the model to test")
+    parser.add_argument("--dataset", type=str, required=True, help="Path to dataset file")
+    parser.add_argument("--n", type=int, default=10, help="Number of problems to process")
+    parser.add_argument("--k", type=int, default=1, help="Number of attempts per problem")
+    parser.add_argument("--api_key", type=str, help="API key (falls back to env if omitted)")
+    parser.add_argument("--mode", type=str, default="lean", help="Prompt mode (default: lean)")
+    parser.add_argument("--concurrency", type=int, default=150, help="Maximum concurrency")
 
     args = parser.parse_args()
 

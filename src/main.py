@@ -52,7 +52,7 @@ def configure_logging() -> None:
 
 
 async def run_generation(model: str, dataset: str, n: int, k: int, api_key: Optional[str], mode: str) -> str:
-    # 复用 generate.py 的统一对外接口，避免重复逻辑
+    # reuse the unified api of generate.py to avoid duplicate logic
     output_file = await generate_to_file(
         model=model,
         dataset=dataset,
@@ -62,7 +62,7 @@ async def run_generation(model: str, dataset: str, n: int, k: int, api_key: Opti
         mode=mode,
         concurrency=150,
     )
-    logging.getLogger(__name__).info("生成阶段完成")
+    logging.getLogger(__name__).info("Generation stage completed")
     return output_file
 
 
@@ -81,7 +81,7 @@ async def main_async():
     configure_logging()
     logger = logging.getLogger(__name__)
 
-    # 1) 生成
+    # 1) Generation
     gen_output = await run_generation(
         model=args.model,
         dataset=args.dataset,
@@ -92,7 +92,7 @@ async def main_async():
     )
     logger.info(f"Generation output: {gen_output}")
 
-    # 2) 验证（支持直接函数调用，也保留 src.verify 的 CLI 用法）
+    # 2) Verification (supports direct function calls, also retains src.verify's CLI usage)
     verify_output = verify_file(gen_output, timeout=args.timeout, max_workers=args.max_workers)
     logger.info(f"Verification output: {verify_output}")
 
